@@ -7,7 +7,7 @@ void parseCommand()
     ////////////////////////////////////////////////////////////////            STOP
     case 's':
     case 'S':
-    
+
       roboclaw.BackwardM1(address, 0);
       roboclaw.BackwardM2(address, 0);
       Serial.println("Stop!");
@@ -17,8 +17,10 @@ void parseCommand()
     case 'f':
     case 'F':
 
-      roboclaw.ForwardM1(address, 50);
-      roboclaw.ForwardM2(address, 50);
+      int pwm;
+      sscanf(&rcv_buffer[1], " %d \r", &pwm);
+      roboclaw.ForwardM1(address, pwm);
+      roboclaw.ForwardM2(address, pwm);
       Serial.println("Moving Forward!");
       break;
 
@@ -26,29 +28,34 @@ void parseCommand()
     case 'b':
     case 'B':
 
-      roboclaw.BackwardM1(address, 50);
-      roboclaw.BackwardM2(address, 50);
+      int pwm1;
+      sscanf(&rcv_buffer[1], " %d \r", &pwm1);
+      roboclaw.BackwardM1(address, pwm1);
+      roboclaw.BackwardM2(address, pwm1);
       Serial.println("Moving Backward!");
-      break;
-
-  
-    /////////////////////////////////////////////////////////////////            Left
-    case 'l':
-    case 'L':
-
-      roboclaw.ForwardM1(address, 20);
-      roboclaw.ForwardM2(address, 50);
-      Serial.println("Left!");
       break;
 
     /////////////////////////////////////////////////////////////////            Right
     case 'r':
     case 'R':
-
-      roboclaw.ForwardM1(address, 50);
-      roboclaw.ForwardM2(address, 20);
+    
+      int pwm2;
+      sscanf(&rcv_buffer[1], " %d \r", &pwm2);
+      roboclaw.ForwardM1(address, pwm2);
+      roboclaw.BackwardM2(address, pwm2);
       Serial.println("Right!");
-      break;  
-  
+      break;
+
+    /////////////////////////////////////////////////////////////////            Left
+    case 'l':
+    case 'L':
+    
+      int pwm3;
+      sscanf(&rcv_buffer[1], " %d \r", &pwm3);
+      roboclaw.ForwardM2(address, pwm3);
+      roboclaw.BackwardM1(address, pwm3);
+      Serial.println("Left!");
+      break;
+
   }
 }
