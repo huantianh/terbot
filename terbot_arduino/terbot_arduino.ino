@@ -12,8 +12,8 @@ char rcv_buffer[64];
 
 void setup() {
   //Open roboclaw serial ports
-  roboclaw.begin(115200);
-  Serial.begin(115200);
+  roboclaw.begin(38400);
+  Serial.begin(38400);
 }
 
 void loop() {
