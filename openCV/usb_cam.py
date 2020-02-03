@@ -4,7 +4,7 @@ import pyrealsense2 as rs
 
 WINDOW_NAME = ('USB Camera on JetsonTX2')
 
-gst_str = ('v4l2src device=/dev/video1 ! '                           
+gst_str = ('v4l2src device=/dev/video2 ! '                           
 		   'video/x-raw, width=(int)1280, height=(int)720 ! '
 		   'videoconvert ! appsink')
 
